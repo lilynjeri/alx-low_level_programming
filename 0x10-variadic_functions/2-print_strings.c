@@ -10,7 +10,7 @@
 * @...: A variable number of strings to be printed.
 *
 * Description: This function takes a string `separator`, the number of
-* strings `n`, and a variable number of strings. It prints the strings
+* strings `n`, and  a variable number of strings. It prints the strings
 * separated by the `separator` string and followed by a newline character.
 * If `separator` is NULL, it is not printed. If one of the strings is NULL,
 * "(nil)" is printed instead.

@@ -1,95 +1,95 @@
 #include "variadic_functions.h"
-#include <stdarg.h>
-#include <stdio.h>
 
 /**
-* print_char - Prints a character.
-* @list: A va_list of arguments.
+* print_char - Print a character.
+* @a_list: The va_list that contains the argument.
 */
-void print_char(va_list list)
+void print_char(va_list a_list)
 {
-printf("%c", va_arg(list, int));
+printf("%c", va_arg(a_list, int));
 }
 
 /**
-* print_int - Prints an integer.
-* @list: A va_list of arguments.
+* print_int - Print an integer.
+* @a_list: The va_list that contains the argument.
 */
-void print_int(va_list list)
+void print_int(va_list a_list)
 {
-printf("%d", va_arg(list, int));
+printf("%i", va_arg(a_list, int));
 }
 
 /**
-* print_float - Prints a float.
-* @list: A va_list of arguments.
+* print_float - Print a float.
+* @a_list: The va_list that contains the argument.
 */
-void print_float(va_list list)
+void print_float(va_list a_list)
 {
-printf("%f", va_arg(list, double));
+printf("%f", va_arg(a_list, double));
 }
 
 /**
-* print_string - Prints a string.
-* @list: A va_list of arguments.
+* print_string - Print a string.
+* @a_list: The va_list that contains the argument.
 */
-void print_string(va_list list)
+void print_string(va_list a_list)
 {
-char *str = va_arg(list, char *);
-if (!str)
+char *str = va_arg(a_list, char*);
+
+if (str == NULL)
 str = "(nil)";
+
 printf("%s", str);
 }
 
 /**
-* print_all - Prints anything based on the format provided.
-* @format: A list of types of arguments passed to the function.
-*
-* Description: This function takes a format string and a variable number of
-* arguments. It iterates through the format string and prints each argument
-* based on its corresponding format specifier. The format string can contain
-* 'c' for characters, 'i' for integers, 'f' for floats, and 's' for strings.
-* The printed values are separated by commas and followed by a newline.
-* If a string argument is NULL, it prints "(nil)".
+* print_all - Prints all of the arguments when specified.
+* @format: specifies the necessary operations.
 */
 void print_all(const char * const format, ...)
 {
-va_list list;
-unsigned int i = 0;
-char *sep = "";
+int i;
+int flag;
+va_list a_list;
 
-void (*print_func[])(va_list) = {
-print_char,
-print_int,
-print_float,
-print_string
-};
+va_start(a_list, format);
 
-va_start(list, format);
-
-if (format)
-{
-while (format[i] && i < 40)  /* Limiting the number of lines as an example */
+i = 0;
+while (format != NULL && format[i] != '\0')
 {
 switch (format[i])
 {
 case 'c':
-case 'i':
-case 'f':
-case 's':
-print_func[format[i] - 'c'](list);
+print_char(a_list);
+flag = 0;
 break;
+
+case 'i':
+print_int(a_list);
+flag = 0;
+break;
+
+case 'f':
+print_float(a_list);
+flag = 0;
+break;
+
+case 's':
+print_string(a_list);
+flag = 0;
+break;
+
 default:
-i++;
-continue;
+flag = 1;
+break;
 }
-if (format[i + 1])
-printf("%s", sep);
-sep = ", ";
+
+if (format[i + 1] != '\0' && flag == 0)
+printf(", ");
+
 i++;
-}
 }
 
 printf("\n");
-va_end(list);
+
+va_end(a_list);
 }

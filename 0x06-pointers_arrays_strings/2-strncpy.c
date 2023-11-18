@@ -3,7 +3,7 @@
 /**
   * _strncpy - The main function of the code
   *
-  * @src: Function parameter
+  * @src   Function Parameter
   *
   * @dest: Function parameter
   *

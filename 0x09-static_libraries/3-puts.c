@@ -1,6 +1,8 @@
 #include "main.h"
-void _puts(char *str)
-#include<stdio.h>
+#include <stdio.h>
+
+void _puts(char *str);
+
 /**
 * main - Entry point
 *
@@ -8,6 +10,13 @@ void _puts(char *str)
 */
 int main(void)
 {
-puts("\"Programming is like building a multilingual puzzle");
+_puts("\"Programming is like building a multilingual puzzle");
 return (0);
+}
+
+void _puts(char *str)
+{
+// Your implementation of _puts goes here
+// You can use printf or puts to print the string
+puts(str);
 }
